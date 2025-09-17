@@ -27,6 +27,7 @@
       width: 100%;
       text-align: center;
       z-index: 2;
+      position: relative;
     }
 
     h1 {
@@ -41,7 +42,19 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 1.2em;
       color: #1565c0;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+    }
+
+    .ring {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 15px;
+    }
+
+    .gif {
+      width: 150px;
+      margin: 10px auto;
+      display: block;
     }
 
     .countdown {
@@ -99,8 +112,10 @@
 </head>
 <body>
   <div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Gold_ring_icon.svg/1024px-Gold_ring_icon.svg.png" alt="טבעת נישואין" class="ring">
     <h1>David & Pnini</h1>
     <div class="date">23.12.2025</div>
+    <img src="https://media.giphy.com/media/3o7TKrghQFbpL9E5yI/giphy.gif" alt="חגיגה" class="gif">
     <div class="countdown">
       <div class="time-box">
         <span id="days">0</span>
