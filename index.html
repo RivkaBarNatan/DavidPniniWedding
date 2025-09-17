@@ -114,7 +114,7 @@ h1 {
 <body>
 <div class="container">
   <h1>David & Pnini</h1>
-  <div class="date">23.12.2025</div>
+  <div class="date">25.12.2025</div>
   <div class="countdown">
     <div class="time-box"><span id="days">0</span><div class="label">ימים</div></div>
     <div class="time-box"><span id="hours">0</span><div class="label">שעות</div></div>
@@ -124,9 +124,8 @@ h1 {
 </div>
 
 <script>
-// ספירה לאחור
-const weddingDate = new Date();
-weddingDate.setDate(weddingDate.getDate() + 100);
+// ספירה לאחור לתאריך 25.12.2025
+const weddingDate = new Date('2025-12-25T00:00:00');
 
 function updateCountdown() {
   const now = new Date().getTime();
@@ -143,7 +142,7 @@ function updateCountdown() {
 setInterval(updateCountdown,1000);
 updateCountdown();
 
-// יצירת טבעות יהלום נופלות
+// יצירת טבעות יהלום נופלות עם ברק צבעוני
 function createDiamondRings() {
   const count = 80;
   for(let i=0;i<count;i++){
@@ -153,12 +152,28 @@ function createDiamondRings() {
     const size = 8 + Math.random()*6;
     ring.style.width = size+'px';
     ring.style.height = size+'px';
-    const hue = Math.random()*360;
+    
+    // צבע בסיס והברק משתנה בזמן הנפילה
+    const hue = 200 + Math.random()*160; 
     ring.style.borderColor = `hsl(${hue},70%,60%)`;
-    ring.style.top = -Math.random()*window.innerHeight + 'px'; // מתחיל מחוץ למסך
     ring.style.animationDuration = (3+Math.random()*4)+'s';
     ring.style.animationDelay = (Math.random()*5)+'s';
+    ring.style.top = -Math.random()*window.innerHeight + 'px';
     ring.style.transform = `rotate(${Math.random()*360}deg)`;
+    
+    // שינוי קל של צבע היהלום כל פעם מחדש
+    const diamond = document.createElement('div');
+    diamond.style.width = '0';
+    diamond.style.height = '0';
+    diamond.style.borderLeft = '4px solid transparent';
+    diamond.style.borderRight = '4px solid transparent';
+    diamond.style.borderBottom = `6px solid hsl(${hue},80%,70%)`;
+    diamond.style.position = 'absolute';
+    diamond.style.top = '-6px';
+    diamond.style.left = '50%';
+    diamond.style.transform = 'translateX(-50%)';
+    ring.appendChild(diamond);
+    
     document.body.appendChild(ring);
   }
 }
