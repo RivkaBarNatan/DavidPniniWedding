@@ -78,8 +78,8 @@ h1 {
 }
 
 @keyframes glow {
-  0%,100% { text-shadow: 0 0 5px #b8860b,0 0 15px #ffd700; }
-  50% { text-shadow: 0 0 15px #b8860b,0 0 25px #ffd700; }
+  0%,100% { text-shadow: 0 0 5px #ffd700, 0 0 15px #ffd700, 0 0 25px #b8860b; }
+  50% { text-shadow: 0 0 15px #ffd700, 0 0 25px #ffd700, 0 0 35px #b8860b; }
 }
 
 /* טבעות יהלום נופלות */
@@ -106,7 +106,7 @@ h1 {
 }
 
 @keyframes fall {
-  0% { transform: translateY(-20px) rotate(0deg); }
+  0% { transform: translateY(-100px) rotate(0deg); }
   100% { transform: translateY(110vh) rotate(360deg); }
 }
 </style>
@@ -124,6 +124,7 @@ h1 {
 </div>
 
 <script>
+// ספירה לאחור
 const weddingDate = new Date();
 weddingDate.setDate(weddingDate.getDate() + 100);
 
@@ -137,30 +138,4 @@ function updateCountdown() {
   document.getElementById("days").innerText = days;
   document.getElementById("hours").innerText = hours;
   document.getElementById("minutes").innerText = minutes;
-  document.getElementById("seconds").innerText = seconds;
-}
-setInterval(updateCountdown,1000);
-updateCountdown();
-
-// יצירת חלקיקים - טבעות יהלום נופלות עם סיבוב אקראי
-function createDiamondRings() {
-  const count = 80;
-  for(let i=0;i<count;i++){
-    const ring = document.createElement('div');
-    ring.classList.add('diamond-ring');
-    ring.style.left = Math.random()*window.innerWidth+'px';
-    const size = 8 + Math.random()*6;
-    ring.style.width = size+'px';
-    ring.style.height = size+'px';
-    const hue = Math.random()*360;
-    ring.style.borderColor = `hsl(${hue},70%,60%)`;
-    ring.style.animationDuration = (3+Math.random()*4)+'s';
-    ring.style.animationDelay = (Math.random()*5)+'s';
-    ring.style.transform = `rotate(${Math.random()*360}deg)`;
-    document.body.appendChild(ring);
-  }
-}
-createDiamondRings();
-</script>
-</body>
-</html>
+  document.getElementById("seconds").innerT
