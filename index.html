@@ -18,22 +18,6 @@
       position: relative;
     }
 
-    body::before {
-      content: '';
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 60%);
-      background-size: 50px 50px;
-      animation: sparkle 5s linear infinite;
-      z-index: 0;
-    }
-
-    @keyframes sparkle {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(-50%, -50%); }
-    }
-
     .container {
       background: rgba(255,255,255,0.9);
       padding: 40px;
@@ -84,8 +68,8 @@
       display: block;
       font-size: 2em;
       font-weight: bold;
-      color: #d81b60;
-      animation: glow 1s ease-in-out infinite;
+      color: #b8860b; /* צבע זהב */
+      animation: glow 1.5s ease-in-out infinite;
     }
 
     .label {
@@ -99,25 +83,28 @@
       50% { transform: scale(1.05); }
     }
 
-    /* אנימציה נוצצת לכל מספר */
     @keyframes glow {
-      0%, 100% { text-shadow: 0 0 5px #d81b60, 0 0 10px #f48fb1; }
-      50% { text-shadow: 0 0 15px #d81b60, 0 0 30px #f48fb1; }
+      0%, 100% { text-shadow: 0 0 5px #ffd700, 0 0 10px #ffec8b; }
+      50% { text-shadow: 0 0 15px #ffd700, 0 0 30px #ffec8b; }
     }
 
+    /* קונפטי/עיגולים בצורת טבעת סביב הספירה */
     .confetti {
       position: absolute;
-      width: 10px;
-      height: 10px;
       border-radius: 50%;
-      top: 0;
       opacity: 0.8;
-      animation: fall 3s linear infinite;
+      width: 8px;
+      height: 8px;
+      animation: spinFall 5s linear infinite;
     }
 
-    @keyframes fall {
-      0% { transform: translateY(0) rotate(0deg); }
-      100% { transform: translateY(100vh) rotate(360deg); }
+    @keyframes spinFall {
+      0% {
+        transform: rotate(0deg) translate(0, -150px) rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg) translate(0, -150px) rotate(-360deg);
+      }
     }
   </style>
 </head>
@@ -167,17 +154,23 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    function createConfetti() {
-      const confetti = document.createElement('div');
-      confetti.classList.add('confetti');
-      confetti.style.left = Math.random() * window.innerWidth + 'px';
-      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
-      confetti.style.width = confetti.style.height = (Math.random()*8 + 4) + 'px';
-      document.body.appendChild(confetti);
-      setTimeout(() => confetti.remove(), 3000);
+    // יצירת קונפטי/עיגולים בצורת טבעת סביב הספירה
+    function createConfettiRing() {
+      const container = document.querySelector('.container');
+      const numberOfCircles = 30; // צפיפות
+      const radius = 150; // רדיוס הטבעת
+
+      for(let i = 0; i < numberOfCircles; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+        const angle = (i / numberOfCircles) * 2 * Math.PI;
+        confetti.style.transform = `rotate(${angle}rad) translate(0, -${radius}px)`;
+        container.appendChild(confetti);
+      }
     }
 
-    setInterval(createConfetti, 200);
+    createConfettiRing();
   </script>
 </body>
 </html>
