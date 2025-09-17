@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <title>ספירה לאחור לחתונה</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #34495e;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .time-box {
+      background: #e3f2fd;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: inset 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    .time-box span {
+      display: block;
+      font-size: 2em;
+      font-weight: bold;
+      color: #1565c0;
+    }
+
+    .label {
+      margin-top: 8px;
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>הספירה לאחור לחתונה 🎉</h1>
+    <div class="countdown">
+      <div class="time-box">
+        <span id="days">0</span>
+        <div class="label">ימים</div>
+      </div>
+      <div class="time-box">
+        <span id="hours">0</span>
+        <div class="label">שעות</div>
+      </div>
+      <div class="time-box">
+        <span id="minutes">0</span>
+        <div class="label">דקות</div>
+      </div>
+      <div class="time-box">
+        <span id="seconds">0</span>
+        <div class="label">שניות</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // חישוב תאריך החתונה - 100 ימים מהיום
+    const weddingDate = new Date();
+    weddingDate.setDate(weddingDate.getDate() + 100);
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
