@@ -138,4 +138,31 @@ function updateCountdown() {
   document.getElementById("days").innerText = days;
   document.getElementById("hours").innerText = hours;
   document.getElementById("minutes").innerText = minutes;
-  document.getElementById("seconds").innerT
+  document.getElementById("seconds").innerText = seconds;
+}
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+// יצירת טבעות יהלום נופלות
+function createDiamondRings() {
+  const count = 80;
+  for(let i=0;i<count;i++){
+    const ring = document.createElement('div');
+    ring.classList.add('diamond-ring');
+    ring.style.left = Math.random()*window.innerWidth+'px';
+    const size = 8 + Math.random()*6;
+    ring.style.width = size+'px';
+    ring.style.height = size+'px';
+    const hue = Math.random()*360;
+    ring.style.borderColor = `hsl(${hue},70%,60%)`;
+    ring.style.top = -Math.random()*window.innerHeight + 'px'; // מתחיל מחוץ למסך
+    ring.style.animationDuration = (3+Math.random()*4)+'s';
+    ring.style.animationDelay = (Math.random()*5)+'s';
+    ring.style.transform = `rotate(${Math.random()*360}deg)`;
+    document.body.appendChild(ring);
+  }
+}
+createDiamondRings();
+</script>
+</body>
+</html>
