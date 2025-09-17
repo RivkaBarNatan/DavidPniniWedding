@@ -30,3 +30,130 @@
     }
 
     h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3em;
+      margin-bottom: 5px;
+      color: #d81b60;
+      animation: pulse 2s infinite;
+    }
+
+    .date {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.2em;
+      color: #1565c0;
+      margin-bottom: 20px;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .time-box {
+      background: #fce4ec;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: inset 0 3px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .time-box:hover {
+      transform: scale(1.1);
+    }
+
+    .time-box span {
+      display: block;
+      font-size: 2em;
+      font-weight: bold;
+      color: #d81b60;
+    }
+
+    .label {
+      margin-top: 8px;
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #ff4081;
+      top: 0;
+      animation: fall 3s linear infinite;
+      opacity: 0.8;
+      border-radius: 50%;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>David & Pnini</h1>
+    <div class="date">23.12.2025</div>
+    <div class="countdown">
+      <div class="time-box">
+        <span id="days">0</span>
+        <div class="label">ימים</div>
+      </div>
+      <div class="time-box">
+        <span id="hours">0</span>
+        <div class="label">שעות</div>
+      </div>
+      <div class="time-box">
+        <span id="minutes">0</span>
+        <div class="label">דקות</div>
+      </div>
+      <div class="time-box">
+        <span id="seconds">0</span>
+        <div class="label">שניות</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const weddingDate = new Date();
+    weddingDate.setDate(weddingDate.getDate() + 100);
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    function createConfetti() {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = Math.random() * window.innerWidth + 'px';
+      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+      confetti.style.width = confetti.style.height = (Math.random()*8 + 4) + 'px';
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 3000);
+    }
+
+    setInterval(createConfetti, 200);
+  </script>
+</body>
+</html>
